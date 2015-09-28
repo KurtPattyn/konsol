@@ -1,0 +1,41 @@
+{
+  "name": "konsol",
+  "version": "0.0.1",
+  "description": "Drop-in replacement for console with verbosity option",
+  "main": "index.js",
+  "keywords": [
+    "console",
+    "log",
+    "verbose"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "istanbul": "^0.3.21",
+    "jscs": "^2.1.1",
+    "jsdoc": "^3.3.3",
+    "jshint": "^2.8.0",
+    "minami": "^1.1.1",
+    "mocha": "^2.3.3"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --bail --reporter spec --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec --check-leaks test/",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
+    "make-docs": "./node_modules/.bin/jsdoc -c jsdoc.conf",
+    "check-style": "./node_modules/jscs/bin/jscs .",
+    "code-analysis": "./node_modules/jshint/bin/jshint ."
+  },
+  "author": {
+    "name": "Kurt Pattyn",
+    "email": "pattyn.kurt@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KurtPattyn/konsol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KurtPattyn/konsol/issues"
+  },
+  "homepage": "https://github.com/KurtPattyn/konsol"
+}

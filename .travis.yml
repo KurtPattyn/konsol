@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - stable
+  - '0.12'
+sudo: false
+deploy:
+  provider: npm
+  email: pattyn.kurt@gmail.com
+  api_key:
+    secure: L1U5U0yQ76sorYtrz51bWAUhj43Muarveju+mUve0UPeeDvXJ9lnc+m9pRnYsK0QbfPRqWOolLp1Sr4QhR3DRUABmaWDtyPR3sdZN0PAegI3JwZ1QLEEIG/iM9I7IaCMiX6gEuelXNcYkOmJ58ZePv2tYc78p4j+K4/ejfqwbWzWGtxluvqXzD8J2+hv6jNU0vKgPnfhxq+/olddNAk9+pP8Th06nGGAPSXhTREkU33QBiRVuT1n4q9LxAHGgEKLMMVamgsy6JnwXfm/V08bWe/GGWxTpwJdJoIAX3crwNj0u/joCslkv4vDRb/Rueup5xf9gCbsqPp/jp74dtPJBHBIOm1y6NM3LtYCO9Uj8498BJB/0ZFbBNFsIW8H/SAPkg8guknNynNy7W0MHm3TtVrW3Vv8ykga7rVeaQvp8OL3yQFUSl12UFeOOixQxLeJ0LaRzW6wyg4dUu6cOC86sGKyyqgHzufihaaex37YPjAj5Mvnd1PLZ5EM6JUZnB1+zBrUT0x2Ypa1BVEyKafw+iYMgJ6a+HYJTc7LzFVBQObB9dR8sAH0dRELIeVGaGVvPeYbSXudMTGflGDtWfNJBoSEniOCG/YbpQ+uTM03bpIBV1wetPsywrZS65klduc+NVyog5NincoFyIE52miJSHwbDAScGmMY5H26ibmkTA0=
+  on:
+    tags: true
+    repo: KurtPattyn/konsol
+    branch: master
+addons:
+  code_climate:
+    repo_token:
+      secure: SA2R5bCS4qRVssSGaWRF9uJ5PodzYvk19MbWsAC+G8Cl0/pjcJ1rj7VhY0LL/sHjr5vX/bILCNNIunYucc2bCZ5L3PToxybDazWTTbhCfeHxj0CLlwnYpea9Q/Qk2ydRnPTdYUIsTBzDsHxLVUaCu6sl5v2f2Dhl2XiP/5VrOjjGYBMgghc6jVXfgqoeh7lDQACtfuPs1V+brGCNEiPh7snA/5FRowGu8+cyGZ9mkPZy+FlJsohaKa9X275GA1BvovLfYRlgfVu7anWbiYYeEIag7pJsCY5QQFnzseBUFnLfQ+JLD+NR5dee85H1/KJ3jfRdlDjTA7qfbl85cQPD2UaN0jOh15iFpRE2oWV9HGfjCIVJYyeRSLM/gVvk6cyIUqAHtIcNNjxieD3MIxN4Kf9+xIfarwm5PLCYeOBbNZU3qcpmuUejGiTmCQPqGGc9MQCgROCF2nu8Owl8i2SZsmvTF3r6F7VTm/A3H/V8JeuITkImXrUIE4m1CpOKeNYPDR49R6kAIN0MA7FE0okPfYPDKxihN9BMxFB9VRN/ulN+8jWW4stFogRGWhvCCpXGwGzHDElFfIFy0hB6tZLJoCoUn2/o7mg3E5o16fWjfr7DTsQftSqAon5OH7MM17/Giamdbxsr58ChhKEnZsZ0deWDM3B/6N5yhzd138zFJYQ=
+before_script:
+  - npm run check-style
+  - npm run code-analysis
+script: npm run test-ci
+after_success:
+  - npm install coveralls && cat ./coverage/lcov.info | coveralls
+  - npm install codeclimate-test-reporter && codeclimate-test-reporter < ./coverage/lcov.info
